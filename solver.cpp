@@ -145,7 +145,7 @@ solver::RealVariable &solver::operator*(RealVariable &x, RealVariable &y)
        ans.beforeX=y.beforeX*x.reeNumber;
        ans.freeNumber= y.freeNumber*x.freeNumber;
    }
-   eif(x.beforeX != 0 && y.beforeX != 0 )
+   else if(x.beforeX != 0 && y.beforeX != 0 )
    {
        ans.pow=x.beforeX*y.beforeX;
        ans.beforeX=x.beforeX*y.freeNumber+x.freeNumber*y.beforeX;
