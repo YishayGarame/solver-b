@@ -16,7 +16,7 @@ public:
     double beforeX;
     double freeNumber;
 
-    RealVariable() : pow(0.0), beforeX(0.0), freeNumber(0.0){};
+    RealVariable() : pow(0.0), beforeX(1.0), freeNumber(0.0){};
     RealVariable(int pow, double beforex, double freenumber) : pow(pow), beforeX(beforex), freeNumber(freenumber){};
 
     ////////////////////////////////   operators RealVarible ////////////////////////////////

@@ -19,7 +19,7 @@ double solver::solve(RealVariable &x)
     {
         return 0;
     }
-    if (a == 0 && b != 0 && c == 0) // x = 0
+    if (a == 0 && b != 0 && c == 0) // 6x = 0
     {
         return 0;
     }
@@ -32,7 +32,6 @@ double solver::solve(RealVariable &x)
     double ans;
     if (a != 0)
     {
-
         double delta = b * b - 4 * a * c;
         if (delta < 0)
         {
@@ -41,7 +40,7 @@ double solver::solve(RealVariable &x)
 
         else if (delta == 0)
         {
-            return (-b / 2 * a);
+            return (-b / (2 * a));
         }
         else //delta > 0 two salutions but we will only retunr one as demanded
         {
@@ -52,87 +51,109 @@ double solver::solve(RealVariable &x)
     }
     else //coefficient for x^2 is zero
     {
-        ans = (b / (-c));
+        ans = ((-c) / b);
         return ans;
     }
 }
 
-double solver::solve(ComplexVariable x)
-{
-    return 1;
-}
-
 ////////////////////////////////operators RealVarible ////////////////////////////////
 
-//operator + //
+//operator + // 
 
 solver::RealVariable &solver::operator+(RealVariable &x, RealVariable &y)
-{
-    if (x.pow == y.pow)
-    {
-        x.pow = x.pow + y.pow;
-    }
-    x.beforeX = x.beforeX + y.beforeX;
-    x.freeNumber = x.freeNumber + y.freeNumber;
-    return x;
+{ 
+    RealVariable ans;
+    ans.pow = x.pow+y.pow;
+    ans.beforeX = x.beforeX+y.beforeX;
+    ans.freeNumber =  x.freeNumber+y.freeNumber;
+  
+    return ans;
 }
 solver::RealVariable &solver::operator+(RealVariable &x, double y)
 {
-    x.freeNumber = x.freeNumber + y;
-    return x;
+    RealVariable ans;
+    ans.pow = x.pow;
+    ans.beforeX = x.beforeX;
+    ans.freeNumber =  x.freeNumber+y;
+  
+    return ans;
 }
 solver::RealVariable &solver::operator+(double y, RealVariable &x)
 {
-    return solver::operator+(x, y);
+
+     RealVariable ans;
+    ans.pow = x.pow;
+    ans.beforeX = x.beforeX;
+    ans.freeNumber =  x.freeNumber+y;
+  
+    return ans;
 }
 
 //operator - //
 
 solver::RealVariable &solver::operator-(RealVariable &x, RealVariable &y)
 {
-    if (x.pow == y.pow)
-    {
-        x.pow = x.pow - y.pow;
-    }
-    x.beforeX = x.beforeX - y.beforeX;
-    x.freeNumber = x.freeNumber - y.freeNumber;
-    return x;
+    RealVariable ans;
+    ans.pow = x.pow-y.pow;
+    ans.beforeX = x.beforeX-y.beforeX;
+    ans.freeNumber =  x.freeNumber-y.freeNumber;
+  
+    return ans;
 }
 solver::RealVariable &solver::operator-(RealVariable &x, double y)
 {
-    x.freeNumber = x.freeNumber - y;
-    return x;
+    RealVariable ans;
+    ans.pow = x.pow;
+    ans.beforeX = x.beforeX;
+    ans.freeNumber =  x.freeNumber-y;
+  
+    return ans;
 }
 solver::RealVariable &solver::operator-(double y, RealVariable &x)
 {
-    x.freeNumber = y - x.freeNumber;
-    return x;
+    RealVariable ans;
+    ans.pow = x.pow;
+    ans.beforeX = x.beforeX;
+    ans.freeNumber =  y-x.freeNumber;
+  
+    return ans;
 }
 
 //operator * //
 
 solver::RealVariable &solver::operator*(RealVariable &x, RealVariable &y)
 {
-    return x;
-}
-solver::RealVariable &solver::operator*(RealVariable &x, double y)
-{
-    return x;
-}
-solver::RealVariable &solver::operator*(double y, RealVariable &x)
-{
-    return x;
-}
+    RealVariable ans;
+   if(x.pow != 0 && y.pow != 0) 
+   {
+        throw runtime_error("Limit of a second defree function"); // x^4
+   }
+   
+   if((x.pow != 0 && y.beforeX != 0 ) || (y.pow != 0 && x.beforeX != 0))
+   {
+        throw runtime_error("Limit of a second defree function"); x^3
+   }
+    if(x.pow != 0 )
+   {
+       ans.pow=x.pow*y.freeNumber;
+       ans.beforeX=x.beforeX*y.reeNumber;
+       ans.freeNumber= x.freeNumber*y.freeNumber;
+   }
+    else if(y.pow != 0)
+   {
+       ans.pow=y.pow*x.freeNumber;
+       ans.beforeX=y.beforeX*x.reeNumber;
+       ans.freeNumber= y.freeNumber*x.freeNumber;
+   }
+   eif(x.beforeX != 0 && y.beforeX != 0 )
+   {
+       ans.pow=x.beforeX*y.beforeX;
+       ans.beforeX=x.beforeX*y.freeNumber+x.freeNumber*y.beforeX;
+       ans.freeNumber=x.freeNumber*y.freeNuber;
+   }
+   return ans;
 
-//operator / //
-
-solver::RealVariable &solver::operator/(RealVariable &x, RealVariable &y)
-{
-    return x;
-}
-solver::RealVariable &solver::operator/(RealVariable &x, double y)
-{
-    return x;
+  
 }
 solver::RealVariable &solver::operator/(double y, RealVariable &x)
 {
@@ -321,4 +342,9 @@ solver::ComplexVariable &solver::operator==(double y, ComplexVariable &x)
     x.re = x.re * y;
     x.im = x.im * y;
     return x;
+}
+
+double solver::solve(ComplexVariable x)
+{
+    return 1;
 }
