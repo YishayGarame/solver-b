@@ -115,6 +115,6 @@ public:
 };
 
 //double solver::solve(solver::ComplexVariable x);
-double solve(ComplexVariable y);
+std::complex<double> solve(ComplexVariable &x);
 
 } // namespace solver

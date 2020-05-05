@@ -13,12 +13,8 @@ run: test
 test: TestRunner.o Test_iris.o Test_shahar.o $(STUDENT_OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o test
 
-main: main.o solver.o	
-	$(CXX) $(CXXFLAGS) main.o solver.o -o main
-
-
 %.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) --compile $< -o $@
 
 clean:
-	rm -f *.o test main
+	rm -f *.o test 
