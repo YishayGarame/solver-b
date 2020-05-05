@@ -374,12 +374,27 @@ solver::ComplexVariable &operator*(ComplexVariable &x, ComplexVariable &y)
 }
 solver::ComplexVariable &operator*(ComplexVariable &x, std::complex<double> y)
 {
+    // ComplexVariable *ans = new ComplexVariable();
+    // ans->pow = x.pow * y;
+    // ans->beforeX = x.beforeX * y;
+    // ans->freeNumber = x.freeNumber * y;
+    // return *ans;
 }
 solver::ComplexVariable &operator*(double y, ComplexVariable &x)
 {
+    ComplexVariable *ans = new ComplexVariable();
+    ans->pow = x.pow * y;
+    ans->beforeX = x.beforeX * y;
+    ans->freeNumber = x.freeNumber * y;
+    return *ans;
 }
 solver::ComplexVariable &operator*(ComplexVariable &x, double y)
 {
+    ComplexVariable *ans = new ComplexVariable();
+    ans->pow = x.pow * y;
+    ans->beforeX = x.beforeX * y;
+    ans->freeNumber = x.freeNumber * y;
+    return *ans;
 }
 solver::ComplexVariable &operator*(std::complex<double> y, ComplexVariable &x)
 {
