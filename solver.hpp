@@ -96,21 +96,22 @@ public:
     friend ComplexVariable &operator*(std::complex<double> y, ComplexVariable &x);
 
     //operator / //
-
-    friend ComplexVariable &operator/(ComplexVariable &x, ComplexVariable &y);
-    friend ComplexVariable &operator/(ComplexVariable &x, double y);
+    friend ComplexVariable &operator/(ComplexVariable &x, ComplexVariable &y); //************
+    friend ComplexVariable &operator/(ComplexVariable &x, std::complex<double> y);
     friend ComplexVariable &operator/(double y, ComplexVariable &x);
-    //operator ^ //
+    friend ComplexVariable &operator/(ComplexVariable &x, double y);
+    friend ComplexVariable &operator/(std::complex<double> y, ComplexVariable &x);
 
-    friend ComplexVariable &operator^(ComplexVariable &x, ComplexVariable &y);
+    //operator ^ //
     friend ComplexVariable &operator^(ComplexVariable &x, double y);
-    friend ComplexVariable &operator^(double y, ComplexVariable &x);
 
     //operator == //
 
     friend ComplexVariable &operator==(ComplexVariable &x, ComplexVariable &y);
-    friend ComplexVariable &operator==(ComplexVariable &x, double y);
+    friend ComplexVariable &operator==(ComplexVariable &x, std::complex<double> y);
     friend ComplexVariable &operator==(double y, ComplexVariable &x);
+    friend ComplexVariable &operator==(ComplexVariable &x, double y);
+    friend ComplexVariable &operator==(std::complex<double> y, ComplexVariable &x);
 };
 
 //double solver::solve(solver::ComplexVariable x);
