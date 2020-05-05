@@ -58,302 +58,331 @@ double solver::solve(RealVariable &x)
 
 ////////////////////////////////operators RealVarible ////////////////////////////////
 
-//operator + // 
+//operator + //
 
 solver::RealVariable &solver::operator+(RealVariable &x, RealVariable &y)
-{ 
-    RealVariable ans;
-    ans.pow = x.pow + y.pow;
-    ans.beforeX = x.beforeX + y.beforeX;
-    ans.freeNumber =  x.freeNumber + y.freeNumber;
-    return ans;
+{
+    RealVariable *ans = new RealVariable();
+    ans->pow = x.pow + y.pow;
+    ans->beforeX = x.beforeX + y.beforeX;
+    ans->freeNumber = x.freeNumber + y.freeNumber;
+    return *ans;
 }
 solver::RealVariable &solver::operator+(RealVariable &x, double y)
 {
-    RealVariable ans;
-    ans.pow = x.pow;
-    ans.beforeX = x.beforeX;
-    ans.freeNumber =  x.freeNumber + y;
-    return ans;
+    RealVariable *ans = new RealVariable();
+    ans->pow = x.pow;
+    ans->beforeX = x.beforeX;
+    ans->freeNumber = x.freeNumber + y;
+    return *ans;
 }
 solver::RealVariable &solver::operator+(double y, RealVariable &x)
 {
-    RealVariable ans;
-    ans.pow = x.pow;
-    ans.beforeX = x.beforeX;
-    ans.freeNumber =  x.freeNumber + y;
-    return ans;
+    RealVariable *ans;
+    ans->pow = x.pow;
+    ans->beforeX = x.beforeX;
+    ans->freeNumber = x.freeNumber + y;
+    return *ans;
 }
-//operator - 
+//operator - //
 
 solver::RealVariable &solver::operator-(RealVariable &x, RealVariable &y)
 {
-    RealVariable ans;
-    ans.pow = x.pow - y.pow;
-    ans.beforeX = x.beforeX - y.beforeX;
-    ans.freeNumber =  x.freeNumber - y.freeNumber;
-    return ans;
+    RealVariable *ans = new RealVariable();
+    ans->pow = x.pow - y.pow;
+    ans->beforeX = x.beforeX - y.beforeX;
+    ans->freeNumber = x.freeNumber - y.freeNumber;
+    return *ans;
 }
 solver::RealVariable &solver::operator-(RealVariable &x, double y)
 {
-    RealVariable ans;
-    ans.pow = x.pow;
-    ans.beforeX = x.beforeX;
-    ans.freeNumber =  x.freeNumber - y;
-    return ans;
+    RealVariable *ans = new RealVariable();
+    ans->pow = x.pow;
+    ans->beforeX = x.beforeX;
+    ans->freeNumber = x.freeNumber - y;
+    return *ans;
 }
 solver::RealVariable &solver::operator-(double y, RealVariable &x)
 {
-    RealVariable ans;
-    ans.pow = x.pow;
-    ans.beforeX = x.beforeX;
-    ans.freeNumber =  y - x.freeNumber;
-    return ans;
+    RealVariable *ans = new RealVariable();
+    ans->pow = x.pow;
+    ans->beforeX = x.beforeX;
+    ans->freeNumber = y - x.freeNumber;
+    return *ans;
 }
 //operator * //
 
 solver::RealVariable &solver::operator*(RealVariable &x, RealVariable &y)
 {
-RealVariable ans;
-   if(x.pow != 0 && y.pow != 0) 
-   {
+    RealVariable *ans = new RealVariable();
+    if (x.pow != 0 && y.pow != 0)
+    {
         throw runtime_error("Limit of a second defree function"); // x^4
-   }
-   
-   if((x.pow != 0 && y.beforeX != 0 ) || (y.pow != 0 && x.beforeX != 0))
-   {
-        throw runtime_error("Limit of a second defree function"); x^3;
-   }
-    if(x.pow != 0 )
-   {
-       ans.pow = x.pow * y.freeNumber;
-       ans.beforeX = x.beforeX * y.freeNumber;
-       ans.freeNumber = x.freeNumber * y.freeNumber;
-   }
-    else if(y.pow != 0)
-   {
-       ans.pow = y.pow * x.freeNumber;
-       ans.beforeX = y.beforeX * x.freeNumber;
-       ans.freeNumber = y.freeNumber * x.freeNumber;
-   }
-   else 
-   {
-       ans.pow = x.beforeX * y.beforeX;
-       ans.beforeX = x.beforeX * y.freeNumber + x.freeNumber * y.beforeX;
-       ans.freeNumber = x.freeNumber * y.freeNumber;
-   }
-   return ans;
+    }
+
+    if ((x.pow != 0 && y.beforeX != 0) || (y.pow != 0 && x.beforeX != 0))
+    {
+        throw runtime_error("Limit of a second defree function");
+        x ^ 3;
+    }
+    if (x.pow != 0)
+    {
+        ans->pow = x.pow * y.freeNumber;
+        ans->beforeX = x.beforeX * y.freeNumber;
+        ans->freeNumber = x.freeNumber * y.freeNumber;
+    }
+    else if (y.pow != 0)
+    {
+        ans->pow = y.pow * x.freeNumber;
+        ans->beforeX = y.beforeX * x.freeNumber;
+        ans->freeNumber = y.freeNumber * x.freeNumber;
+    }
+    else
+    {
+        ans->pow = x.beforeX * y.beforeX;
+        ans->beforeX = x.beforeX * y.freeNumber + x.freeNumber * y.beforeX;
+        ans->freeNumber = x.freeNumber * y.freeNumber;
+    }
+    return *ans;
 }
 solver::RealVariable &solver::operator*(RealVariable &x, double y)
 {
-    RealVariable ans;
-    ans.pow = x.pow * y;
-    ans.beforeX = x.beforeX * y;
-    ans.freeNumber = x.freeNumber * y;
-    return ans;
+    RealVariable *ans = new RealVariable();
+    ans->pow = x.pow * y;
+    ans->beforeX = x.beforeX * y;
+    ans->freeNumber = x.freeNumber * y;
+    return *ans;
 }
 solver::RealVariable &solver::operator*(double y, RealVariable &x)
 {
-    RealVariable ans;
-    ans.pow = x.pow * y;
-    ans.beforeX = x.beforeX * y;
-    ans.freeNumber = x.freeNumber * y;
-    return ans;
-
+    RealVariable *ans = new RealVariable();
+    ans->pow = x.pow * y;
+    ans->beforeX = x.beforeX * y;
+    ans->freeNumber = x.freeNumber * y;
+    return *ans;
 }
-// solver::RealVariable &solver::operator/(RealVariable &x, RealVariable &y)
-// {
-//     RealVariable ans;
 
-//     return ans;
-// }
 solver::RealVariable &solver::operator/(RealVariable &x, double y)
 {
-    RealVariable ans;
-    if (y == 0){
-        throw runtime_error("cant divid by zero"); 
+    RealVariable *ans = new RealVariable();
+    if (y == 0)
+    {
+        throw runtime_error("cant divid by zero");
     }
-    ans.pow = x.pow / y;
-    ans.beforeX = x.beforeX / y;
-    ans.freeNumber = x.freeNumber / y;  
+    ans->pow = x.pow / y;
+    ans->beforeX = x.beforeX / y;
+    ans->freeNumber = x.freeNumber / y;
 
-    return ans;
+    return *ans;
 }
 solver::RealVariable &solver::operator/(double y, RealVariable &x)
 {
-    RealVariable ans;
-    if (x.pow == 0 || x.beforeX == 0 || x.freeNumber == 0){
-        throw runtime_error("cant divid by zero"); 
+    RealVariable *ans = new RealVariable();
+    if (x.pow == 0 || x.beforeX == 0 || x.freeNumber == 0)
+    {
+        throw runtime_error("cant divid by zero");
     }
-    ans.pow = y / x.pow;
-    ans.beforeX = y / x.beforeX;
-    ans.freeNumber = y / x.freeNumber;  
-    return ans;
+    ans->pow = y / x.pow;
+    ans->beforeX = y / x.beforeX;
+    ans->freeNumber = y / x.freeNumber;
+    return *ans;
 }
 
 //operator ^ //
 
-// solver::RealVariable &solver::operator^(RealVariable &x, RealVariable &y)
-// {
-//     return x;
-// }
 solver::RealVariable &solver::operator^(RealVariable &x, double y)
 {
-        RealVariable ans;
-        if (y > 2 || y < 0 || ((y == 2 && x.pow != 0)))
-        {
-            throw runtime_error("limit degree of 0-2");
-        }
+    RealVariable *ans = new RealVariable();
+    if (y > 2 || y < 0 || ((y == 2 && x.pow != 0)))
+    {
+        throw runtime_error("limit degree of 0-2");
+    }
 
-        else if (y == 0)      // y = 0
-        {
-            ans.pow == 0;
-            ans.beforeX = 0;
-            ans.freeNumber = 1;
-        }
-        else if (y == 1)            // y = 1
-        {        
-            ans.pow = x.pow;
-            ans.beforeX = x.beforeX;
-            ans.freeNumber = x.freeNumber;
-        } 
-        else if (y == 2 && x.beforeX == 0)        // 5^2
-        {
-            ans.pow = 0;
-            ans.beforeX = 0;
-            ans.freeNumber = x.freeNumber * x.freeNumber;
-        }
-          else if (y == 2 && x.freeNumber == 0)      // x^2
-        {
-            ans.pow = x.beforeX * x.beforeX;
-            ans.beforeX = 0;
-            ans.freeNumber = 0;
-        } 
-        else                                    // (x + 3) ^ 2
-        {
-            ans.pow = x.beforeX * x.beforeX;
-            ans.beforeX = x.beforeX * x.freeNumber;
-            ans.freeNumber = x.freeNumber * x.freeNumber;
-        }
+    else if (y == 0) // y = 0
+    {
+        ans->pow == 0;
+        ans->beforeX = 0;
+        ans->freeNumber = 1;
+    }
+    else if (y == 1) // y = 1
+    {
+        ans->pow = x.pow;
+        ans->beforeX = x.beforeX;
+        ans->freeNumber = x.freeNumber;
+    }
+    else if (y == 2 && x.beforeX == 0) // 5^2
+    {
+        ans->pow = 0;
+        ans->beforeX = 0;
+        ans->freeNumber = x.freeNumber * x.freeNumber;
+    }
+    else if (y == 2 && x.freeNumber == 0) // x^2
+    {
+        ans->pow = x.beforeX * x.beforeX;
+        ans->beforeX = 0;
+        ans->freeNumber = 0;
+    }
+    else // (x + 3) ^ 2
+    {
+        ans->pow = x.beforeX * x.beforeX;
+        ans->beforeX = 2 * (x.beforeX * x.freeNumber);
+        ans->freeNumber = x.freeNumber * x.freeNumber;
+    }
 
-        return ans;
-
+    return *ans;
 }
-// solver::RealVariable &solver::operator^(double y, RealVariable &x)
-// {
-//     return x;
-// }
 
 //operator == //
 
 solver::RealVariable &solver::operator==(RealVariable &x, RealVariable &y)
 {
-    RealVariable ans;
-    ans.pow = x.pow - y.pow;
-    ans.beforeX = x.beforeX - y.beforeX;
-    ans.freeNumber = x.freeNumber - y.freeNumber;
-    return ans;
+    RealVariable *ans = new RealVariable();
+    ans->pow = x.pow - y.pow;
+    ans->beforeX = x.beforeX - y.beforeX;
+    ans->freeNumber = x.freeNumber - y.freeNumber;
+    return *ans;
 }
 solver::RealVariable &solver::operator==(RealVariable &x, double y)
 {
-    RealVariable ans;
-    ans.freeNumber = x.freeNumber - y;
-    return ans;
+    RealVariable *ans = new RealVariable();
+    ans->pow = x.pow;
+    ans->beforeX = x.beforeX;
+    ans->freeNumber = x.freeNumber - y;
+    return *ans;
 }
 solver::RealVariable &solver::operator==(double y, RealVariable &x)
 {
-    RealVariable ans;
-    ans.pow = - x.pow;
-    ans.beforeX = - x.beforeX;
-    ans.freeNumber =  y - x.freeNumber;
-    return ans;
+
+    RealVariable *ans = new RealVariable();
+    ans->pow = -x.pow;
+    ans->beforeX = -x.beforeX;
+    ans->freeNumber = y - x.freeNumber;
+    return *ans;
 }
 
 ////////////////////////////////operators ComplexVariable////////////////////////////////
 
 //operator + //
 
-solver::ComplexVariable &solver::operator+(ComplexVariable &x, ComplexVariable &y)
+solver::ComplexVariable &operator+(ComplexVariable &x, ComplexVariable &y)
 {
-    x.re = x.re + y.re;
-    x.im = x.im = y.im;
-    return x;
+    ComplexVariable *ans = new ComplexVariable();
+    ans->pow = x.pow + y.pow;
+    ans->beforeX = x.beforeX + y.beforeX;
+    ans->freeNumber = x.freeNumber + y.freeNumber;
+    return *ans;
 }
-solver::ComplexVariable &solver::operator+(ComplexVariable &x, std::complex<double> y)
+solver::ComplexVariable &operator+(ComplexVariable &x, std::complex<double> y)
 {
-    // x.re = x.re + y.real;
-    // x.im = x.im = y.imag;
-    return x;
+    ComplexVariable *ans = new ComplexVariable();
+    ans->pow = x.pow;
+    ans->beforeX = x.beforeX;
+    ans->freeNumber = x.freeNumber + y;
+    return *ans;
 }
-
-solver::ComplexVariable &solver::operator+(std::complex<double> y, ComplexVariable &x)
+solver::ComplexVariable &operator+(double y, ComplexVariable &x)
 {
-    // x.re = x.re + y.real;
-    // x.im = x.im = y.imag;
-    return x;
+    ComplexVariable *ans = new ComplexVariable();
+    ans->pow = x.pow;
+    ans->beforeX = x.beforeX;
+    ans->freeNumber = x.freeNumber + y;
+    return *ans;
 }
-solver::ComplexVariable &solver::operator+(ComplexVariable &x, double y)
+solver::ComplexVariable &operator+(ComplexVariable &x, double y)
 {
-    x.re = x.re + y;
-    return x;
+    ComplexVariable *ans = new ComplexVariable();
+    ans->pow = x.pow;
+    ans->beforeX = x.beforeX;
+    ans->freeNumber = x.freeNumber + y;
+    return *ans;
 }
-solver::ComplexVariable &solver::operator+(double y, ComplexVariable &x)
+solver::ComplexVariable &operator+(std::complex<double> y, ComplexVariable &x)
 {
-    x.re = x.re + y;
-    return x;
+    ComplexVariable *ans = new ComplexVariable();
+    ans->pow = x.pow;
+    ans->beforeX = x.beforeX;
+    ans->freeNumber = x.freeNumber + y;
+    return *ans;
 }
 
 //operator - //
 
-solver::ComplexVariable &solver::operator-(ComplexVariable &x, ComplexVariable &y)
+solver::ComplexVariable &operator-(ComplexVariable &x, ComplexVariable &y)
 {
-    x.re = x.re - y.re;
-    x.im = x.im = y.im;
-    return x;
+    ComplexVariable *ans = new ComplexVariable();
+    ans->pow = x.pow - y.pow;
+    ans->beforeX = x.beforeX - y.beforeX;
+    ans->freeNumber = x.freeNumber - y.freeNumber;
+    return *ans;
 }
 solver::ComplexVariable &operator-(ComplexVariable &x, std::complex<double> y)
 {
-    // x.re = x.re + y.real;
-    // x.im = x.im = y.imag;
-    return x;
+    ComplexVariable *ans = new ComplexVariable();
+    ans->pow = x.pow;
+    ans->beforeX = x.beforeX;
+    ans->freeNumber = x.freeNumber - y;
+    return *ans;
 }
-
+solver::ComplexVariable &operator-(double y, ComplexVariable &x)
+{
+    ComplexVariable *ans = new ComplexVariable();
+    ans->pow = x.pow;
+    ans->beforeX = x.beforeX;
+    ans->freeNumber = y - x.freeNumber;
+    return *ans;
+}
+solver::ComplexVariable &operator-(ComplexVariable &x, double y)
+{
+    ComplexVariable *ans = new ComplexVariable();
+    ans->pow = x.pow;
+    ans->beforeX = x.beforeX;
+    ans->freeNumber = x.freeNumber - y;
+    return *ans;
+}
 solver::ComplexVariable &operator-(std::complex<double> y, ComplexVariable &x)
 {
-    // x.re = x.re + y.real;
-    // x.im = x.im = y.imag;
-    return x;
-}
-solver::ComplexVariable &solver::operator-(ComplexVariable &x, double y)
-{
-    x.re = x.re - y;
-    return x;
-}
-solver::ComplexVariable &solver::operator-(double y, ComplexVariable &x)
-{
-    x.re = y - x.re;
-    return x;
+    ComplexVariable *ans = new ComplexVariable();
+    ans->pow = -x.pow;
+    ans->beforeX = -x.beforeX;
+    ans->freeNumber = y - x.freeNumber;
+    return *ans;
 }
 
 //operator * //
 
-solver::ComplexVariable &solver::operator*(ComplexVariable &x, ComplexVariable &y)
+solver::ComplexVariable &operator*(ComplexVariable &x, ComplexVariable &y)
 {
-    x.re = ((x.re * y.re) - (x.im * y.im));
-    x.im = ((x.re * y.im) + (x.im * y.re));
-    return x;
+    std::complex<double> zero = std::complex<double>(0, 0);
+    ComplexVariable *ans = new ComplexVariable();
+    if ((x.pow != zero && (y.pow != zero)) || (x.pow != zero && (y.beforeX != zero)) || (y.pow != zero && (x.pow != zero)) || (y.pow != zero && (x.beforeX != zero)))
+    {
+        throw runtime_error("Limit of a second defree function");
+    }
+    if (x.beforeX != zero || y.beforeX != zero) // (5+4i)x +3* (5+4i)x+3  ,(5+4i)x+3*5 , 5*(5+4i)x+3
+    {
+        ans->pow = x.beforeX * y.beforeX;
+        ans->beforeX = x.beforeX * y.freeNumber + x.freeNumber * y.beforeX;
+        ans->freeNumber = x.freeNumber * y.freeNumber;
+    }
+    if ((x.freeNumber != zero && y.pow != zero) || y.freeNumber != zero && x.pow != zero) // (5+4i)x +3 ^ 2 * (5+4i)
+    {
+        ans->pow = y.pow * x.freeNumber;
+        ans->beforeX =
+    }
+
+    return *ans;
 }
-solver::ComplexVariable &solver::operator*(ComplexVariable &x, double y)
+solver::ComplexVariable &operator*(ComplexVariable &x, std::complex<double> y)
 {
-    x.re = x.re * y;
-    x.im = x.im * y;
-    return x;
 }
-solver::ComplexVariable &solver::operator*(double y, ComplexVariable &x)
+solver::ComplexVariable &operator*(double y, ComplexVariable &x)
 {
-    x.re = x.re * y;
-    x.im = x.im * y;
-    return x;
+}
+solver::ComplexVariable &operator*(ComplexVariable &x, double y)
+{
+}
+solver::ComplexVariable &operator*(std::complex<double> y, ComplexVariable &x)
+{
 }
 
 //operator / //
